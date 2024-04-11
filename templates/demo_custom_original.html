@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<script src="{{ url_for('static', filename='vendor/google/jsapi.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/google/transliteration.I.js') }}"></script>
+<script type="text/javascript">
+    // Load the Google Transliterate API
+    google.load("elements", "1", {
+        packages: "transliteration"
+    });
+    let transliterationControl;
+    function onLoad() {
+        let options = {
+            sourceLanguage:
+                google.elements.transliteration.LanguageCode.ENGLISH,
+            destinationLanguage:
+                [
+                    google.elements.transliteration.LanguageCode.HINDI,
+                    google.elements.transliteration.LanguageCode.TELUGU,
+                    google.elements.transliteration.LanguageCode.MALAYALAM
+                ],
+            // shortcutKey: 'ctrl+g',
+            transliterationEnabled: true
+        };
+
+        // Create an instance on TransliterationControl with the required options.
+        transliterationControl = new google.elements.transliteration.TransliterationControl(options);
+
+        // Enable transliteration in the textbox with id
+        // 'transliterate Textarea'.
+        transliterationControl.makeTransliteratable(['text']);
+    }
+
+    google.setOnLoadCallback(onLoad);
+</script>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="grid-x">
+    <div class="cell">
+        <h1 class="title">TTS Demo - Custom Text</h1>
+    </div>
+</div>
+
+<div class="grid-x grid-margin-x">
+    <div class="cell large-6">
+        <form action="{{ url_for('api') }}" method="post" id="custom_form">
+            <label for="language">Select Language (resets any text entered below)</label>
+            <select name="language" id="language">
+                <option value="Hindi">Hindi</option>
+                <option value="Telugu">Telugu</option>
+                <option value="Malayalam">Malayalam</option>
+            </select>
+            <label for="text">Text to convert (type in english and press <kbd>SPACE BAR</kbd> to transliterate)</label><textarea name="text" id="text"></textarea>
+            <input type="submit" value="Listen" class="button float-right">
+        </form>
+    </div>
+    <div class="cell large-5 large-offset-1">
+        <div class="card" style="margin-top: 1em;">
+            <div class="card-divider">Audio</div>
+            <div class="card-section" id="custom_player" style="display: none; padding: 0; margin-bottom: 0;">
+                <audio controls id="audio_player" style="width: 100%;">
+                    <source src="" type="audio/mpeg" id="audio_src">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            <div class="card-section" id="error_msg" style="text-align: center;">Not ready yet.</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block foot %}
+
+<script>
+    $(document).ready(function () {
+        $('#language').change(function () {
+            let languageCodes = {
+                'English': google.elements.transliteration.LanguageCode.ENGLISH,
+                'Telugu': google.elements.transliteration.LanguageCode.TELUGU,
+                'Hindi': google.elements.transliteration.LanguageCode.HINDI,
+                'Malayalam': google.elements.transliteration.LanguageCode.MALAYALAM
+            };
+            transliterationControl.setLanguagePair(
+                google.elements.transliteration.LanguageCode.ENGLISH,
+                languageCodes[this.value]
+            );
+            $('#text').val('');
+            flashNoty('success', 'Language switched to ' + this.value);
+        });
+
+        function onPostSuccess(responseObj, statusText, xhr) {
+            let player_window = $('#custom_player');
+            let error_window = $('#error_msg');
+            let audio_player = document.getElementById('audio_player');
+            let audio_src = $('#audio_src');
+            if (responseObj.status === 'success') {
+                player_window.show();
+                error_window.html('');
+                error_window.hide();
+                audio_src.attr('src', responseObj.url);
+                audio_player.load();
+                audio_player.play();
+            } else {
+                player_window.hide();
+                error_window.html(responseObj.message);
+                error_window.show();
+                audio_src.attr('src', null);
+                {#audio_player.load();#}
+            }
+        }
+
+        function onPostFailure(xhr, statusText, error) {
+            let player_window = $('#custom_player');
+            let error_window = $('#error_msg');
+            error_window.html(statusText);
+            error_window.show();
+            player_window.hide();
+        }
+
+        function beforePost() {
+            let error_window = $('#error_msg');
+            let player_window = $('#custom_player');
+            player_window.hide();
+            error_window.show();
+            error_window.html('<i class="fas fa-sync fa-spin fa-lg"></i><span style="margin-left: 1.3rem;">Loading...</span>');
+        }
+
+        let form = $('#custom_form');
+        form.submit(function(e) {
+            e.preventDefault();
+
+            let url = '{{ url_for('api') }}';
+            let payload = form.serialize();
+
+            $.ajax({
+                beforeSend: beforePost,
+                url: url,
+                data: payload,
+                type: 'POST',
+                success: onPostSuccess,
+                error: onPostFailure,
+                dataType: 'json'
+            });
+        });
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<script src="{{ url_for('static', filename='vendor/google/jsapi.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/google/transliteration.I.js') }}"></script>
+
+
+{% endblock %}
+
+{% block content %}
+
+<div class="grid-x">
+    <div class="cell">
+        <h1 class="title">Resultant Lip-synced Video</h1>
+    </div>
+</div>
+  <video controls="" autoplay="" name="media">
+    <source src={{ value }} type="video/mp4">
+  </video>
+{% endblock %}

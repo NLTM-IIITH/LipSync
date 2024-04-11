@@ -1,0 +1,279 @@
+body {
+    font-family: "Work Sans", sans-serif;
+}
+
+.home-overlay {
+    position: relative;
+    z-index: 2;
+}
+
+.home-overlay:after {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.banner-overlay {
+    position: relative;
+    z-index: 2;
+}
+
+.banner-overlay:after {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+nav.orbit-bullets {
+    position: absolute;
+    top: 85%;
+    right: 5%;
+    z-index: 20;
+}
+
+@media (max-width: 640px) {
+    nav.orbit-bullets {
+        position: absolute;
+        top: 70%;
+        right: 5%;
+        z-index: 20;
+    }
+}
+
+nav.orbit-bullets button {
+    position: relative;
+    margin: 0.4375em;
+    padding: 1.25em;
+    border-radius: 0.3125em;
+    border: 0.125em solid rgba(80, 80, 80, 0.8);
+    background: transparent;
+    color: #555;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.7em;
+}
+
+nav.orbit-bullets button.is-active,
+nav.orbit-bullets button:hover,
+button.orbit-previous:hover,
+button.orbit-next:hover {
+    background: rgba(80, 80, 80, 0.4);
+    color: #9a9a9a;
+}
+
+nav.orbit-bullets button p {
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    font-size: 0.7rem;
+}
+
+li.orbit-slide figcaption {
+    display: none;
+}
+
+.orbit-previous, .orbit-next {
+    height: 10rem;
+}
+
+li.is-active figcaption {
+    display: block;
+    position: absolute;
+    top: 80%;
+    left: 5%;
+    padding: 0.3125em 0.625em;
+    color: #ccc;
+    background: rgba(0, 0, 0, 0.6);
+    font-size: 1.375em;
+    z-index: 3;
+    border-radius: 0.1rem;
+    width: inherit;
+    bottom: auto;
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+.home-overlay .orbit-slide {
+    min-height: 25rem;
+    height: 70vh;
+}
+
+@media (max-width: 640px) {
+    .home-overlay .orbit-slide {
+        min-height: 25rem;
+        height: 50vh;
+    }
+}
+
+.orbit-figure img {
+    min-height: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+footer {
+    background-color: rgb(20, 20, 20);
+    color: #ddd;
+    margin-top: 4rem;
+    padding: 2rem;
+    margin-bottom: 0;
+}
+
+footer a {
+    text-decoration: none;
+    color: #118AB2;
+    font-size: 14px;
+}
+
+footer a:hover {
+    color: white;
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+    text-decoration: none;
+    color: #999999;
+    display: none;
+}
+
+.tabs-caption {
+    font-weight: bold;
+    float: right;
+    padding: 0.8rem 2rem;
+}
+
+.card {
+    padding-bottom: 1.6rem;
+}
+
+.card-section {
+    color: rgb(80, 80, 80);
+    padding-right: 1.6rem;
+    padding-left: 1.6rem;
+}
+
+.card-padding {
+    padding: 0 1.6rem 1.6rem !important;
+}
+
+.card-divider {
+    font-weight: 600;
+    color: rgb(68, 68, 68);
+    background-color: #EFEFEF;
+    padding-right: 1.6rem;
+    padding-left: 1.6rem;
+}
+
+.horizontal-card {
+    display: inline-block;
+    width: 100%;
+}
+
+.horizontal-card .card-image {
+    float: left;
+    padding: 1rem 0 1rem 1rem;
+}
+
+.horizontal-card.small .card-image {
+    float: left;
+    padding: 0;
+}
+
+.horizontal-card .card-image img {
+    width: 100%;
+}
+
+.horizontal-card .card-content {
+    float: left;
+    max-width: 80%;
+}
+
+.horizontal-card .card-content .card-header {
+    width: 100%;
+    font-weight: 600;
+    color: rgb(68, 68, 68);
+    border-bottom: 1px solid #EFEFEF;
+    margin: 1rem 1rem 0.5rem 1rem;
+}
+
+.horizontal-card .card-content .card-section {
+    width: 100%;
+    padding: 0.5rem 1rem;
+}
+
+.horizontal-card .card-content .card-footer {
+    width: 100%;
+    color: rgb(88, 88, 88);
+    font-style: italic;
+    font-size: 0.8rem;
+    margin: 1rem 1rem 0.5rem 1rem;
+}
+
+.title {
+    font-weight: 600;
+    color: rgb(68, 68, 68);
+    border-bottom: 1px solid #EFEFEF;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    font-size: 1.4rem;
+}
+
+.subtitle {
+    font-weight: 600;
+    color: rgb(68, 68, 68);
+    border-bottom: 1px solid #EFEFEF;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.margin-top-2 {
+    margin-top: 2rem;
+}
+
+.horizontal-card .card-section {
+    width: 100%;
+}
+
+.horizontal-card .subtitle {
+    margin-bottom: -1rem;
+}
+
+#noty_layout__topRight {
+    z-index: 30;
+    top: 5rem;
+}
+
+.tooltip {
+    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 0 4px 0;
+       -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 0 4px 0;
+            box-shadow: rgba(0, 0, 0, 0.2) 0 0 4px 0;
+}
+
+small.error {
+    font-size: 13px;
+    color: #F04124;
+}
+
+ul.errorlist li {
+    font-size: 13px;
+    color: #F04124;
+}
+
+ul.errorlist.nonfield li {
+    font-size: 14px;
+    color: #F04124;
+}

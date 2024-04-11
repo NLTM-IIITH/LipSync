@@ -1,0 +1,124 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title  -->
+    <title>Interactive Wav2Lip Demo{% if title %} | {{ title }}{% endif %}</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/foundation/css/app.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/noty/lib/noty.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/noty/demo/animate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <script>
+        if (!(document.addEventListener)) {
+            alert(
+                "You have to upgrade your browser or use another modern browser to view and use this portal correctly."
+            );
+        }
+    </script>
+
+    <!-- Additional Headers -->
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+
+
+<!-- End Navigation -->
+
+<!-- No-Script to warn of disabled Javascript in browser -->
+<noscript>
+    <div class="grid-x grid-margin-x align">
+        <div class="small-10 cell small-centered" style="line-height: 1.6; padding-top: 15px;">
+            <div data-alert class="alert-box info radius center-justified">It is necessary to enable JavaScript
+                for this site to work as intended. Here are the
+                <a href="http://www.enable-javascript.com" target="_blank">instructions how to enable JavaScript
+                    in your web browser</a>. If you are using a JS blocking plugin, please allow JS on this site.
+            </div>
+        </div>
+    </div>
+</noscript>
+
+<!-- Page Content -->
+<div id="banner" {% if not banner %}style="display: none;"{% endif %}>
+    {% block banner %}{% endblock %}
+</div>
+
+<!-- Grid Container Begin -->
+<div class="grid-container{% if full_width %} fluid {%- endif %}" style="padding-top: 1rem; {% if not banner %}margin-top: 1rem;{% endif %}">
+
+    <!-- Breadcrumbs -->
+    {% block breadcrumbs %}{% endblock %}
+
+    <!-- Page Content -->
+    {% block content %}{% endblock %}
+
+</div>
+<!-- Grid Container End -->
+
+<!-- Scroll-to-top button -->
+<a href="#" class="back-to-top"><i class="fa fa-arrow-circle-up fa-3x"></i></a>
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="grid-x grid-margin-x">
+        <div class="cell medium-6" style="margin-left: 2em;">
+            <h5 style="font-weight: bold; margin:0;">Interactive Wav2Lip Demo</h5>
+        </div>
+        <div class="cell auto">
+            <div class="grid-x grid-margin-x">
+                <div class="cell small-2">
+                    <a href="">Demo Video</a>
+                </div>
+                <div class="cell small-2">
+                    <a href="https://github.com/Rudrabha/Wav2Lip">Code</a>
+                </div>
+                <div class="cell small-2">
+                    <a href="tp://cvit.iiit.ac.in/research/projects/cvit-projects/a-lip-sync-expert-is-all-you-need-for-speech-to-lip-generation-in-the-wild">Project Page</a>
+                </div>
+                <div class="cell small-2">
+                    <a href="">Paper</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<!-- JS Libraries -->
+<script src="{{ url_for('static', filename='vendor/foundation/js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/foundation/js/what-input.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/foundation/js/foundation.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/noty/lib/noty.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% block foot %}{% endblock %}
+
+<script>
+    $(document).ready(function () {
+    // Expand or shrink top navigation bar
+    {% if banner %}
+        $('.top-bar').on('sticky.zf.stuckto:top', function () {
+            $(this).addClass('shrink');
+        }).on('sticky.zf.unstuckfrom:top', function () {
+            $(this).removeClass('shrink');
+        });
+    {% endif %}
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+        // Category can be alert, success, error, warning, info
+        flashNoty('{{ category }}', '{{ message|safe }}');
+    {% endfor %}
+    });
+</script>
+
+</body>
+</html>
