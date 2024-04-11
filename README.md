@@ -6,4 +6,4 @@ This repository will be having the codes of our recent Lipsync paper which by fa
 
 | Models |  Description | Checkpoints |
 | :-------------: | :---------------: | :---------------: |
-| Wav2Lip model | put it inside checkpints| [Link](https://drive.google.com/file/d/18ep_4lCSacF2M9I7d6I-izhAyTCkpn7j/view?usp=sharing)
+| Wav2Lip model | place it in checkpints| [Link](https://drive.google.com/file/d/18ep_4lCSacF2M9I7d6I-izhAyTCkpn7j/view?usp=sharing)
