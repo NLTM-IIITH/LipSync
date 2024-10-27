@@ -41,8 +41,6 @@ python fa_batch_inference.py --checkpoint_path <checkpoint> --face <input_video.
 
 
 
-### Run App
-python app.py
 
 
 # Results
