@@ -18,7 +18,13 @@ pip install -r requirements.txt
 ```
 
 ### Training
+The process involves two primary steps: (i) Training an expert lip-sync discriminator, and (ii) Training the Wav2Lip model(s).
 
+- lip-sync discriminator
+```
+python color_syncnet_train.py --data_root lrs2_preprocessed/ --checkpoint_dir <folder_to_save_checkpoints>
+```
+- Wav2Lip
 ```
 python train.py --data_root lrs2_preprocessed/ --checkpoint_dir <folder_to_save_checkpoints> --syncnet_checkpoint_path <path_to_expert_disc_checkpoint>
 ```
