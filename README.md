@@ -11,7 +11,7 @@ We aim to comprehend the effective utilization of video translation in an educat
 ## Getting Started
 
 ### Requirements 
-- Python>=3.8
+- Python>=3.6
 
 ```
 pip install -r requirements.txt
