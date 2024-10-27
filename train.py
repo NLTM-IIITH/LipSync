@@ -1,7 +1,7 @@
 from os.path import dirname, join, basename, isfile
 from tqdm import tqdm
 
-from models import SyncNet_color as SyncNet
+from models import SyncNet as SyncNet
 from models import Wav2Lip as Wav2Lip
 import audio
 
