@@ -113,7 +113,7 @@ def datagen(detector, frames, mels, batch_size, face_det_batch_size, static, pad
 		yield img_batch, mel_batch, frame_batch, coords_batch
 
 def generate(detector, checkpoint_path, face, audio, static, fps, pads, face_det_batch_size, 
-			wav2lip_batch_size, resize_factor, device, basename):
+			wav2lip_batch_size, resize_factor, device, basename, results_dir):
 	
 	img_size = 96
 	mel_step_size = 16
@@ -205,7 +205,7 @@ def generate(detector, checkpoint_path, face, audio, static, fps, pads, face_det
 	out.release()
 
 	command = 'ffmpeg -y -i {} -i {} -strict -2 -q:v 1 {}'.format(audio, 'temp/{}.avi'.format(basename), 
-				'static/{}.mp4'.format(basename))
+				'{}.mp4'.format(os.path.join(results_dir, basename)))
 	subprocess.call(command, shell=True)
 
 	generated_video_path = 'static/{}.mp4'.format(basename)
@@ -256,7 +256,7 @@ if __name__ == '__main__':
 		parser.add_argument('--wav2lip_batch_size', type=int, help='Single GPU batch size for LipGAN', default=128)
 
 		parser.add_argument('--resize_factor', default=1, type=int)
-		parser.add_argument('--basename', default="synced_result", type=str)
+		parser.add_argument('--basename', default="output", type=str)
 
 		parser.add_argument('--device', default='cuda', help='which device to run Wav2Lip on?', type=str)
 
@@ -273,7 +273,7 @@ if __name__ == '__main__':
 
 		generated_video_path = generate(detector, args.checkpoint_path, args.face, args.audio, args.static, 
 										args.fps, args.pads, args.face_det_batch_size, 
-										args.wav2lip_batch_size, args.resize_factor, args.device, args.basename)
+										args.wav2lip_batch_size, args.resize_factor, args.device, args.basename, args.results_dir)
 
 	except Exception as e:
 		exception = repr(e)
