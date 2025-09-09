@@ -5,7 +5,7 @@ import os
 import re
 import time
 from shutil import copy
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 import subprocess
 import random, string
 import time
