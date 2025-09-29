@@ -1,4 +1,22 @@
-from tensorflow.contrib.training import HParams
+# from tensorflow.contrib.training import HParams
+# Replacing old tensorflow.contrib.training.HParams
+class HParams:
+    def __init__(self, **kwargs):
+        self._dict = kwargs
+
+    def values(self):
+        return self._dict
+
+    def __getattr__(self, key):
+        return self._dict[key]
+
+    def __setattr__(self, key, value):
+        if key == "_dict":
+            super().__setattr__(key, value)
+        else:
+            self._dict[key] = value
+
+
 from glob import glob
 import os, pickle
 import numpy as np
