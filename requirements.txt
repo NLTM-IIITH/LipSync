@@ -1,8 +1,21 @@
+# Core numerical + JIT
+numpy==1.23.5
+numba==0.56.4
+llvmlite==0.39.1
+
+# Audio processing
 librosa==0.9.2
-numpy==1.21.6
-opencv-contrib-python==4.5.5.64
-opencv-python==4.5.5.64
-tensorflow==2.10.0
-torch==1.12.1
-torchvision==0.13.1
-tqdm==4.45.0
+
+# Computer vision
+opencv-python==4.6.0.66
+opencv-contrib-python==4.6.0.66
+scikit-image==0.19.3
+
+# Deep learning frameworks
+tensorflow==2.10.1
+torch==1.13.1
+torchvision==0.14.1
+
+# Utilities
+tqdm==4.65.0
+flask==2.2.5
