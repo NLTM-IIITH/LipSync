@@ -120,12 +120,29 @@ def generate(detector, checkpoint_path, face, audio, static, fps, pads, face_det
 
 	if os.path.isfile(face) and face.split('.')[1] in ['jpg', 'png', 'jpeg']:
 		static = True
-		face.split('.')[1] in ['jpg', 'png', 'jpeg']
+
+	if face.split('.')[1] in ['jpg', 'png', 'jpeg']:
 		full_frames = [cv2.imread(face)]
 		fps = 25
-
 	else:
-		print ("THE INPUT NEEDS TO BE AN IMAGE")
+		video_stream = cv2.VideoCapture(face)
+		fps = video_stream.get(cv2.CAP_PROP_FPS)
+
+		full_frames = []
+		while 1:
+			still_reading, frame = video_stream.read()
+			if not still_reading:
+				video_stream.release()
+				break
+			if resize_factor > 1:
+				frame = cv2.resize(frame, (frame.shape[1]//resize_factor, frame.shape[0]//resize_factor))
+
+			full_frames.append(frame)
+
+			if len(full_frames) >= max_len * fps: 
+				video_stream.release()
+				# raise VideoTooLong('Video length {} greater than {}'.format(len(full_frames) / float(fps), max_len))
+				break
 
 
 	# yield 'Video Reading Complete...'
