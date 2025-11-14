@@ -252,7 +252,7 @@ if __name__ == '__main__':
 		parser = argparse.ArgumentParser(description='Code to generate talking face using Temporal LipGAN')
 
 		parser.add_argument('--checkpoint_path', type=str, 
-							help='logs/', required=True)
+							help='logs/', required=False, default='/app/checkpoints/gen_258k_0.03_sl_0.1_disc.pth')
 
 		parser.add_argument('--face', type=str, 
 							help='Filepath of video/image that contains faces to use', required=True)

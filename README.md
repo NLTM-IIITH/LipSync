@@ -35,9 +35,25 @@ You can synchronize any video (whether of a human face or animated character) wi
 python fa_batch_inference.py --checkpoint_path <checkpoint> --face <input_video.mp4> --audio <input_audio> --results_dir <output_directory>
 ```
 
+### Docker Inference
+Now also available to run inference as docker. 
+To create the docker image first make sure that the checkpoint is downloaded inside the checkpoint folder, then use the following command.
+```sh
+docker build -t lipsync:latest .
+```
+To run inference on docker mount the input and output folders from the host machine and run the following command
+```sh
+docker run -it --rm --gpus all \
+  -v <full-path-input-folder>:/input \
+  -v <full-path-results-folder>:/output \
+  lipsync:latest \
+  python fa_batch_inference.py --face /input/image.jpg --audio /input/audio.wav --results_dir /output
+```
+
+
 | Models |  Description | Checkpoints |
 | :-------------: | :---------------: | :---------------: |
-| Wav2Lip model | place it in checkpints| [Link](https://drive.google.com/file/d/18ep_4lCSacF2M9I7d6I-izhAyTCkpn7j/view?usp=sharing)
+| Wav2Lip model | place it in checkpoints/| [Link](https://drive.google.com/file/d/18ep_4lCSacF2M9I7d6I-izhAyTCkpn7j/view?usp=sharing)
 
 
 

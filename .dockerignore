@@ -1,0 +1,87 @@
+# ----------------------------
+# Python bytecode / cache
+# ----------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyz
+*.pyw
+
+# ----------------------------
+# Virtual environments
+# ----------------------------
+venv/
+.env/
+env/
+.venv/
+
+# ----------------------------
+# Build / distribution
+# ----------------------------
+build/
+dist/
+*.egg-info/
+*.egg
+
+# ----------------------------
+# Jupyter notebooks checkpoints
+# ----------------------------
+.ipynb_checkpoints/
+
+# ----------------------------
+# Configuration / secrets
+# ----------------------------
+*.env
+*.secret
+*.pem
+*.key
+*.crt
+secrets.json
+
+# ----------------------------
+# Logs / Dumps
+# ----------------------------
+logs/
+*.log
+*.out
+*.err
+*.pid
+
+# ----------------------------
+# Temporary files
+# ----------------------------
+*.tmp
+tmp/
+.cache/
+*.swp
+*.swo
+
+
+# ----------------------------
+# Python tools
+# ----------------------------
+.mypy_cache/
+pytest_cache/
+.coverage
+htmlcov/
+
+# ----------------------------
+# OS/System files
+# ----------------------------
+.DS_Store
+Thumbs.db
+
+# ----------------------------
+# Git
+# ----------------------------
+.git/
+.gitignore
+
+# ----------------------------
+# Docker-related
+# ----------------------------
+Dockerfile*
+docker-compose*.yml
+
+
